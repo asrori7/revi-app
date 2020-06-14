@@ -38,4 +38,28 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The relationship roles.
+     *
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * The function for attach role.
+     *
+     */
+    public function assignRole($role)
+    {
+        if (is_string($role)) {
+            $role = Role::where('name', $role)->first();
+        }
+
+        if (!$this->roles->contains('id', $role->id)) {
+            return $this->roles()->attach($role);
+        }
+    }
 }

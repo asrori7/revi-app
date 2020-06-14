@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    use Authenticatable, Authorizable;
-
     /**
      * The attributes that are mass assignable.
      *
